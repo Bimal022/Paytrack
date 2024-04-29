@@ -32,6 +32,17 @@ const AppReducer = (state, action) => {
 					(inc) => inc.id !== action.payload
 				),
 			}; */
+			case "RESET_TRANSACTIONS":
+            return {
+                ...state,
+                expenses: [],
+                incomes: []
+            };
+			case "RESET_BUDGET":
+            return {
+                ...state,
+				budget: 0,
+            };
 		default:
 			return state;
 	}
@@ -98,6 +109,16 @@ export const AppProvider = ({ children }) => {
 				payload: id,
 			});
 	} */
+	function resetTransactions() {
+        dispatch({
+            type: "RESET_TRANSACTIONS",
+        });
+	}
+	function resetBudget() {
+        dispatch({
+            type: "RESET_BUDGET",
+        });
+	}
 	return (
 		<AppContext.Provider
 			value={{
@@ -108,6 +129,8 @@ export const AppProvider = ({ children }) => {
 				addBudget,
 				addExpense,
 				dispatch,
+				resetTransactions,
+				resetBudget
 				// deleteTransaction,
 			}}
 		>
